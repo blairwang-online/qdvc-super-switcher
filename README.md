@@ -4,7 +4,15 @@
 
 On GNOME and Windows, <kbd>Super</kbd>+<kbd>1</kbd> … <kbd>Super</kbd>+<kbd>9</kbd> jump straight to the 1st … 9th window in the taskbar. MATE has no equivalent. This is a small Python script that fills the gap: bind each <kbd>Super</kbd>+<kbd>N</kbd> to `super_switcher.py N`, and it activates the Nth window in panel order using `xdotool`.
 
-Vibe-coding details in [vibe-coding/](vibe-coding/)
+Vibe-coding details in [vibe-coding/](https://github.com/blairwang-online/qdvc-super-switcher/blob/main/vibe-coding)
+
+> [!IMPORTANT]
+> **This tool numbers windows by their order in `_NET_CLIENT_LIST`, not by their live position in the taskbar.**
+>
+> - ✅ **It copes with windows closing.** Survivors keep their relative order and shift up to fill the gaps, so the numbering stays sensible.
+> - ❌ **It does *not* cope with windows being manually reordered.** Dragging taskbar buttons around changes their visual position but not their `_NET_CLIENT_LIST` order, so the numbers will no longer match what you see.
+>
+> **So: don't drag-reorder windows in the MATE taskbar if you want this tool to behave predictably.** If you need a particular set of programs in a particular order for some task — say, quickly flipping between a web browser, a file manager, and a terminal — the simplest approach is to close all windows and then intentionally open the programs you need in the sequence you want.
 
 ## Why not wmctrl?
 
@@ -18,7 +26,7 @@ Based on my brief testing on Ubuntu 26.04, it seems that `wmctrl -a` isn't worki
 
 ## Install
 
-```bash
+```
 chmod +x super_switcher.py
 ```
 
